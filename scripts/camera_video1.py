@@ -9,8 +9,13 @@ while(True):
     #print(tf)
     ## to change the video framwe in grey color
    # frame=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    cv2.imshow('Single frame',frame)
-    key = cv2.waitKey(0)## it will keep on
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    upper_red = np.array([130,255,255])
+    lower_red = np.array([110,100,100])
+    mask = cv2.inRange(frame, lower_red, upper_red)
+    frame = cv2.bitwise_and(frame,frame, mask=mask)    
+    cv2.imshow('Single Frame', frame)
+    key = cv2.waitKey(1)
     if key == 27:
         print(key)
         break
